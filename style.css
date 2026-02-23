@@ -1,13 +1,11 @@
-/* 1. Overall Theme */
 body {
     background-color: #000000;
     color: #ffffff;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    overflow-x: hidden;
 }
 
 .screen {
@@ -22,113 +20,71 @@ body {
 
 .hidden { display: none !important; }
 
-/* 2. Splash & Logo */
-.logo-container img {
-    max-width: 85%;
-    max-height: 300px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px #ccff00;
-    margin-top: 50px;
-    margin-bottom: 40px;
-}
-
-/* 3. The Grid of 21 */
+/* Grid of 21 */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 12px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin-top: 20px;
 }
 
 .station-tile {
-    background: #1a1a1a;
+    background: #111;
     color: #ccff00;
     border: 2px solid #ccff00;
-    padding: 20px;
+    padding: 20px 10px;
     font-size: 24px;
     font-weight: bold;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(204, 255, 0, 0.2);
+    border-radius: 10px;
 }
 
-/* 4. The Integrated Player Zone */
-#player-zone {
+/* Transcript Area - Optimized for Mobile */
+#transcript-box {
     width: 100%;
-    max-width: 500px;
-    text-align: center;
+    max-width: 600px;
+    margin-top: 30px;
+    padding: 20px;
+    background: #0a0a0a;
+    border-top: 1px solid #333;
+    border-radius: 10px;
 }
 
-.audio-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
+.line-container {
+    margin-bottom: 35px; /* Extra space for readability */
 }
 
-/* Small, gray tech buttons for Play/Pause/Stop */
-.ctrl-btn {
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
+.clickable-word {
+    font-size: 26px; /* Huge text for easy tapping on mobile */
+    line-height: 1.8;
+    display: inline-block;
     cursor: pointer;
+    margin-right: 6px;
+    transition: transform 0.1s;
 }
 
-/* 5. The NEON TRIO Buttons */
+.clickable-word:active { transform: scale(1.2); color: #fff; }
+
+/* Speaker Colors */
+.speaker-official { color: #1e90ff; font-style: italic; } /* Bright Dark Blue */
+.speaker-traveler { color: #ff4444; font-weight: bold; }  /* Vivid Red */
+
+/* Neon Mode Buttons */
 .mode-btn {
-    width: 90%;
-    padding: 18px;
-    margin: 10px 0;
+    width: 95%;
+    padding: 16px;
+    margin: 8px 0;
     font-size: 18px;
     font-weight: bold;
     border-radius: 50px;
     background: transparent;
     cursor: pointer;
-    text-transform: uppercase;
 }
 
-.neon-blue {
-    color: #00e5ff;
-    border: 3px solid #00e5ff;
-    box-shadow: 0 0 15px #00e5ff, inset 0 0 5px #00e5ff;
-}
+.neon-blue { color: #00e5ff; border: 3px solid #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+.neon-green { color: #39ff14; border: 3px solid #39ff14; box-shadow: 0 0 10px #39ff14; }
+.neon-pink { color: #ff00ff; border: 3px solid #ff00ff; box-shadow: 0 0 10px #ff00ff; }
 
-.neon-green {
-    color: #39ff14;
-    border: 3px solid #39ff14;
-    box-shadow: 0 0 15px #39ff14, inset 0 0 5px #39ff14;
-}
-
-.neon-pink {
-    color: #ff00ff;
-    border: 3px solid #ff00ff;
-    box-shadow: 0 0 15px #ff00ff, inset 0 0 5px #ff00ff;
-}
-
-/* 6. Return Button */
-.back-btn {
-    margin-top: 40px;
-    background: none;
-    color: #888;
-    border: 1px solid #444;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Standard Buttons for Splash/Instructions */
-.action-btn {
-    background-color: transparent;
-    color: #ccff00;
-    border: 2px solid #ccff00;
-    padding: 20px 40px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 40px;
-    box-shadow: 0 0 15px #ccff00;
-}
+.back-btn { margin-top: 40px; color: #666; background: none; border: none; font-size: 16px; cursor: pointer; }
+.ctrl-btn { background: #222; color: #fff; border: 1px solid #444; padding: 10px 15px; border-radius: 5px; margin: 5px; cursor: pointer; }
