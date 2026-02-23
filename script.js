@@ -6,26 +6,42 @@ const playerZone = document.getElementById('player-zone');
 const audio = document.getElementById('audio-player');
 const transcript = document.getElementById('transcript-box');
 
-// Navigation
 document.getElementById('btn-start').onclick = () => { splash.classList.add('hidden'); instr.classList.remove('hidden'); };
 document.getElementById('btn-enter').onclick = () => { instr.classList.add('hidden'); app.classList.remove('hidden'); };
-document.getElementById('btn-back').onclick = () => { playerZone.classList.add('hidden'); grid.classList.remove('hidden'); transcript.classList.add('hidden'); audio.pause(); };
+document.getElementById('btn-back').onclick = () => { playerZone.classList.add('hidden'); grid.classList.remove('hidden'); transcript.classList.add('hidden'); audio.pause(); window.scrollTo(0,0); };
 
-// Controls
 document.getElementById('ctrl-play').onclick = () => audio.play();
 document.getElementById('ctrl-pause').onclick = () => audio.pause();
 document.getElementById('ctrl-stop').onclick = () => { audio.pause(); audio.currentTime = 0; };
 
 const stations = [
     { file: "01_Airport_Check-in.wav", title: "Airport Check-in" },
-    { file: "02_Boarding_and_Seating.wav", title: "Boarding & Seating" }
-    // Add more here later
+    { file: "02_Boarding_and_Seating.wav", title: "Boarding & Seating" },
+    { file: "03_Initial_Flight_Attendant.wav", title: "Initial Flight Attendant" },
+    { file: "04_In-Flight_Request.wav", title: "In-Flight Request" },
+    { file: "05_Passport_Control.wav", title: "Passport Control" },
+    { file: "06_Customs_Clearance.wav", title: "Customs Clearance" },
+    { file: "07_Finding_Transportation.wav", title: "Finding Transportation" },
+    { file: "08_Hotel_Check-in.wav", title: "Hotel Check-in" },
+    { file: "09_Room_Problem_Arises.wav", title: "Room Problem Arises" },
+    { file: "10_Solving_the_Room_Problem.wav", title: "Solving the Problem" },
+    { file: "11_Car_Rental.wav", title: "Car Rental" },
+    { file: "12_Fancy_Dinner.wav", title: "Fancy Dinner" },
+    { file: "13_Restaurant_Problem.wav", title: "Restaurant Problem" },
+    { file: "14_Falling_Ill.wav", title: "Falling Ill" },
+    { file: "15_Hospital_Visit.wav", title: "Hospital Visit" },
+    { file: "16_Pharmacy_Run.wav", title: "Pharmacy Run" },
+    { file: "17_Police_Station_Report.wav", title: "Police Station Report" },
+    { file: "18_Shoe_Shopping.wav", title: "Shoe Shopping" },
+    { file: "19_Returning_the_Car.wav", title: "Returning the Car" },
+    { file: "20_Arranging_Airport_Transfer.wav", title: "Arranging Transfer" },
+    { file: "21_Taxi_to_the_Airport.wav", title: "Taxi to Airport" }
 ];
 
 stations.forEach((s, i) => {
     const btn = document.createElement('div');
     btn.className = 'station-tile';
-    btn.innerHTML = `<strong>${i + 1}</strong> <span>${s.title}</span>`;
+    btn.innerHTML = `<b>${i + 1}</b> ${s.title}`;
     btn.onclick = () => {
         grid.classList.add('hidden');
         playerZone.classList.remove('hidden');
@@ -62,4 +78,4 @@ document.getElementById('btn-read').onclick = () => {
 };
 
 document.getElementById('btn-blind').onclick = () => { transcript.classList.add('hidden'); audio.play(); };
-document.getElementById('btn-game').onclick = () => alert("Match Game is currently in production!");
+document.getElementById('btn-game').onclick = () => alert("Match Game Coming Soon!");
