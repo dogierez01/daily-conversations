@@ -2,51 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Daily Conversations</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="splash-screen" class="screen">
         <div class="logo-container">
             <img src="logo.png" alt="App Logo" id="main-logo">
         </div>
-        <button id="btn-start" class="action-btn">START</button>
+        <button id="btn-start" class="action-btn neon-yellow">START</button>
     </div>
 
     <div id="instructions-screen" class="screen hidden">
-        <img src="instructions.png" alt="Instructions" id="instructions-img">
-        <button id="btn-enter" class="action-btn">I UNDERSTAND -> ENTER</button>
+        <div class="instructions-container">
+            <img src="instructions.png" alt="Instructions" id="instructions-img">
+        </div>
+        <button id="btn-enter" class="action-btn neon-yellow">I UNDERSTAND -> ENTER</button>
     </div>
 
     <div id="main-app" class="screen hidden">
-        <h1 id="app-title">Daily Conversations</h1>
-        
+        <h1 id="app-title">Conversations</h1>
         <div id="stations-grid" class="grid-container"></div>
 
         <div id="player-zone" class="hidden">
             <h2 id="now-playing-title">Station Name</h2>
-            
             <div class="audio-controls">
                 <button id="ctrl-play" class="ctrl-btn">▶ PLAY</button>
                 <button id="ctrl-pause" class="ctrl-btn">⏸ PAUSE</button>
                 <button id="ctrl-stop" class="ctrl-btn">⏹ STOP</button>
             </div>
-
             <div class="learning-buttons">
                 <button id="btn-blind" class="mode-btn neon-blue">🎧 LISTEN BLIND</button>
                 <button id="btn-read" class="mode-btn neon-green">📖 LISTEN + READ</button>
                 <button id="btn-game" class="mode-btn neon-pink">🎮 MATCH GAME</button>
             </div>
-
             <div id="transcript-box" class="hidden"></div>
             <button id="btn-back" class="back-btn">⬅ BACK TO LIST</button>
         </div>
     </div>
-
     <audio id="audio-player" controlsList="nodownload"></audio>
-
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
