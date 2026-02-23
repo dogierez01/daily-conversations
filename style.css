@@ -1,90 +1,30 @@
-body {
-    background-color: #000000;
-    color: #ffffff;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.screen {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
+body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; }
+.screen { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 10px; box-sizing: border-box; }
 .hidden { display: none !important; }
 
-/* Grid of 21 */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    width: 100%;
-    max-width: 450px;
-    margin-top: 20px;
-}
+/* Fixed Logo Size */
+.logo-container img { max-width: 70%; max-height: 180px; border-radius: 15px; box-shadow: 0 0 20px #ccff00; margin: 30px 0; }
 
-.station-tile {
-    background: #111;
-    color: #ccff00;
-    border: 2px solid #ccff00;
-    padding: 20px 10px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 10px;
-}
+/* Big Readable Splash Buttons */
+.action-btn { width: 85%; padding: 25px; font-size: 22px; font-weight: bold; border-radius: 50px; background: #111; margin-top: 20px; cursor: pointer; }
+.neon-yellow { color: #ccff00; border: 4px solid #ccff00; box-shadow: 0 0 15px #ccff00; }
 
-/* Transcript Area - Optimized for Mobile */
-#transcript-box {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 30px;
-    padding: 20px;
-    background: #0a0a0a;
-    border-top: 1px solid #333;
-    border-radius: 10px;
-}
+/* Grid with Titles */
+.grid-container { display: grid; grid-template-columns: 1fr; gap: 10px; width: 95%; max-width: 500px; margin-top: 10px; }
+.station-tile { background: #1a1a1a; color: #ccff00; border: 2px solid #ccff00; padding: 15px; border-radius: 10px; text-align: left; font-size: 18px; cursor: pointer; }
+.station-tile span { display: block; font-size: 14px; color: #aaa; margin-top: 4px; }
 
-.line-container {
-    margin-bottom: 35px; /* Extra space for readability */
-}
+/* Speaker Colors & Full Text */
+#transcript-box { width: 100%; max-width: 600px; background: #080808; padding: 20px; border-radius: 10px; border-top: 2px solid #333; margin-top: 20px; }
+.line-container { margin-bottom: 25px; line-height: 1.6; }
+.clickable-word { font-size: 24px; display: inline-block; margin-right: 5px; cursor: pointer; }
+.speaker-official { color: #1e90ff; } /* Bright Blue */
+.speaker-traveler { color: #ff4444; } /* Bright Red */
 
-.clickable-word {
-    font-size: 26px; /* Huge text for easy tapping on mobile */
-    line-height: 1.8;
-    display: inline-block;
-    cursor: pointer;
-    margin-right: 6px;
-    transition: transform 0.1s;
-}
-
-.clickable-word:active { transform: scale(1.2); color: #fff; }
-
-/* Speaker Colors */
-.speaker-official { color: #1e90ff; font-style: italic; } /* Bright Dark Blue */
-.speaker-traveler { color: #ff4444; font-weight: bold; }  /* Vivid Red */
-
-/* Neon Mode Buttons */
-.mode-btn {
-    width: 95%;
-    padding: 16px;
-    margin: 8px 0;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 50px;
-    background: transparent;
-    cursor: pointer;
-}
-
+/* Player Buttons */
+.mode-btn { width: 100%; padding: 18px; margin: 8px 0; font-size: 18px; font-weight: bold; border-radius: 50px; background: transparent; }
 .neon-blue { color: #00e5ff; border: 3px solid #00e5ff; box-shadow: 0 0 10px #00e5ff; }
 .neon-green { color: #39ff14; border: 3px solid #39ff14; box-shadow: 0 0 10px #39ff14; }
 .neon-pink { color: #ff00ff; border: 3px solid #ff00ff; box-shadow: 0 0 10px #ff00ff; }
-
-.back-btn { margin-top: 40px; color: #666; background: none; border: none; font-size: 16px; cursor: pointer; }
-.ctrl-btn { background: #222; color: #fff; border: 1px solid #444; padding: 10px 15px; border-radius: 5px; margin: 5px; cursor: pointer; }
+.back-btn { margin-top: 30px; background: #222; color: #fff; border: 1px solid #ccff00; padding: 12px 25px; border-radius: 10px; font-size: 16px; }
+.ctrl-btn { background: #333; color: #fff; border: none; padding: 12px 18px; border-radius: 8px; margin: 5px; font-size: 14px; }
