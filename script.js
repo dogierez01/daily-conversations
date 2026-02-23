@@ -1,6 +1,6 @@
 const splash = document.getElementById('splash-screen'), instr = document.getElementById('instructions-screen'), app = document.getElementById('main-app'), grid = document.getElementById('stations-grid'), playerZone = document.getElementById('player-zone'), audio = document.getElementById('audio-player'), transcript = document.getElementById('transcript-box'), popup = document.getElementById('translation-popup'), gameZone = document.getElementById('game-zone'), gameBoard = document.getElementById('game-board');
 
-let wordBucket = []; // This is where tapped words are saved
+let wordBucket = []; // Tapped words
 let firstCard = null;
 
 // Navigation
@@ -15,11 +15,11 @@ const stations = [
 stations.forEach((s, i) => {
     const btn = document.createElement('div'); btn.className = 'station-tile';
     btn.innerHTML = `<b>${i + 1}</b> ${s.title}`;
-    btn.onclick = () => { grid.classList.add('hidden'); playerZone.classList.remove('hidden'); document.getElementById('now-playing-title').innerText = s.title; audio.src = s.file; };
+    btn.onclick = () => { grid.classList.add('hidden'); playerZone.classList.remove('hidden'); document.getElementById('now-playing-title').innerText = s.title; audio.src = s.file; wordBucket = []; }; // Reset bucket per lesson
     grid.appendChild(btn);
 });
 
-// Listen + Read: SAVE WORDS TO BUCKET
+// Translation & Bucket Logic
 document.getElementById('btn-read').onclick = () => {
     const filename = audio.src.split('/').pop();
     const data = typeof lessonData !== 'undefined' ? lessonData[filename] : null;
@@ -29,15 +29,12 @@ document.getElementById('btn-read').onclick = () => {
         data.forEach(line => {
             const div = document.createElement('div'); div.className = `line-container speaker-${line.speaker}`;
             line.text.split(" ").forEach(w => {
-                const span = document.createElement('span'); const clean = w.replace(/[.,?!]/g, "");
+                const span = document.createElement('span'); const clean = w.replace(/[.,?!]/g, "").toLowerCase();
                 span.innerText = w + " "; span.className = "clickable-word";
                 span.onclick = (e) => { 
-                    const tr = line.dict[clean]; 
+                    const tr = line.dict[w.replace(/[.,?!]/g, "")] || line.dict[clean]; 
                     if(tr) {
-                        // Add to bucket if not already there
-                        if (!wordBucket.some(pair => pair.en === clean)) {
-                            wordBucket.push({en: clean, tr: tr});
-                        }
+                        if (!wordBucket.some(p => p.en.toLowerCase() === clean)) { wordBucket.push({en: clean, tr: tr}); }
                         popup.innerText = tr; popup.style.left = `${e.pageX}px`; popup.style.top = `${e.pageY - 45}px`;
                         popup.classList.remove('hidden'); setTimeout(() => popup.classList.add('hidden'), 1500);
                     }
@@ -50,43 +47,56 @@ document.getElementById('btn-read').onclick = () => {
     }
 };
 
-// Match Game Logic
+// MATCH GAME ALGORITHM
 document.getElementById('btn-game').onclick = () => {
-    if (wordBucket.length < 3) {
-        alert("Look up at least 3 words in 'Listen + Read' mode first to build your game bucket!");
-        return;
+    const filename = audio.src.split('/').pop();
+    const lesson = lessonData[filename];
+    if (!lesson) return;
+
+    // 1. Determine final pair count
+    let finalPairs = wordBucket.length;
+    if (finalPairs < 4) finalPairs = 4; // Minimum 8 cards
+    if (finalPairs % 2 !== 0) finalPairs += 1; // Always even
+
+    // 2. Build the selected set
+    let selectedSet = [...wordBucket];
+
+    // 3. Fill the gaps from the lesson dictionary if bucket is too small
+    const fullDict = Object.assign({}, ...lesson.map(l => l.dict));
+    const allEn = Object.keys(fullDict);
+    
+    for (let word of allEn) {
+        if (selectedSet.length >= finalPairs) break;
+        if (!selectedSet.some(p => p.en.toLowerCase() === word.toLowerCase())) {
+            selectedSet.push({en: word, tr: fullDict[word]});
+        }
     }
+
+    // 4. Generate Cards
     transcript.classList.add('hidden'); gameZone.classList.remove('hidden');
-    gameBoard.innerHTML = "";
-    firstCard = null;
+    gameBoard.innerHTML = ""; firstCard = null;
 
-    // Pick 4 random words from bucket (or less if bucket is small)
-    const selection = [...wordBucket].sort(() => 0.5 - Math.random()).slice(0, 4);
-    let cards = [];
-    selection.forEach(p => {
-        cards.push({text: p.en, match: p.tr, type: 'en'});
-        cards.push({text: p.tr, match: p.en, type: 'tr'});
+    let deck = [];
+    selectedSet.forEach(p => {
+        deck.push({text: p.en, match: p.tr});
+        deck.push({text: p.tr, match: p.en});
     });
-    cards.sort(() => 0.5 - Math.random());
+    deck.sort(() => 0.5 - Math.random());
 
-    cards.forEach(c => {
-        const div = document.createElement('div');
-        div.className = 'game-card';
-        div.innerText = c.text;
+    deck.forEach(card => {
+        const div = document.createElement('div'); div.className = 'game-card';
+        div.innerText = card.text;
         div.onclick = () => {
-            if (div.classList.contains('correct')) return;
+            if (div.classList.contains('correct') || div.classList.contains('selected')) return;
             if (firstCard) {
-                if (firstCard === div) return;
-                if (firstCard.innerText === c.match) {
+                if (firstCard.innerText === card.match) {
                     div.classList.add('correct'); firstCard.classList.add('correct');
-                    firstCard = null;
+                    firstCard.classList.remove('selected'); firstCard = null;
                 } else {
                     div.classList.add('wrong');
                     setTimeout(() => { div.classList.remove('wrong'); firstCard.classList.remove('selected'); firstCard = null; }, 500);
                 }
-            } else {
-                firstCard = div; div.classList.add('selected');
-            }
+            } else { firstCard = div; div.classList.add('selected'); }
         };
         gameBoard.appendChild(div);
     });
