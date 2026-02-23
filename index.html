@@ -8,17 +8,19 @@
 </head>
 <body>
     <div id="splash-screen" class="screen">
-        <div class="logo-container">
-            <img src="logo.png" alt="App Logo" id="main-logo">
+        <div class="splash-container">
+            <div class="logo-container">
+                <img src="logo.png" alt="App Logo" id="main-logo">
+            </div>
+            <button id="btn-start" class="action-btn-small neon-yellow">START</button>
         </div>
-        <button id="btn-start" class="action-btn-small neon-yellow">START</button>
     </div>
 
     <div id="instructions-screen" class="screen hidden">
-        <div class="instructions-container">
+        <div class="splash-container">
             <img src="instructions.png" alt="Instructions" id="instructions-img">
+            <button id="btn-enter" class="action-btn-small neon-yellow">ENTER APP</button>
         </div>
-        <button id="btn-enter" class="action-btn-small neon-yellow">ENTER APP</button>
     </div>
 
     <div id="main-app" class="screen hidden">
@@ -41,6 +43,9 @@
             <button id="btn-back" class="back-btn">⬅ BACK TO LIST</button>
         </div>
     </div>
+
+    <div id="translation-popup" class="hidden"></div>
+    
     <audio id="audio-player" controlsList="nodownload"></audio>
     <script src="data.js"></script>
     <script src="script.js"></script>
