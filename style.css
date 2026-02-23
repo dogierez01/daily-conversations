@@ -2,40 +2,33 @@ body { background: #000; color: #fff; font-family: sans-serif; margin: 0; paddin
 .screen { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
 .hidden { display: none !important; }
 
-/* Splash Screen 70% Fix */
-.splash-container { width: 70%; max-width: 450px; text-align: center; }
-.logo-container img { width: 100%; border-radius: 20px; box-shadow: 0 0 30px #ccff00; }
-.action-btn-small { width: auto; min-width: 120px; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 30px; background: #111; margin-top: 25px; color: #ccff00; border: 2px solid #ccff00; box-shadow: 0 0 10px #ccff00; cursor: pointer; }
+/* 70% Width Wrapper for Logo and Instructions */
+.content-wrapper { width: 70%; max-width: 450px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.image-box img { width: 100%; border-radius: 20px; box-shadow: 0 0 30px #ccff00; margin-bottom: 20px; }
 
-/* Grid & Text */
+/* Small Professional Action Buttons */
+.action-btn-small { width: auto; min-width: 140px; padding: 12px 25px; font-size: 15px; font-weight: bold; border-radius: 30px; background: #111; color: #ccff00; border: 2px solid #ccff00; box-shadow: 0 0 10px #ccff00; cursor: pointer; transition: 0.2s; }
+.action-btn-small:active { transform: scale(0.95); background: #ccff00; color: #000; }
+
+/* Grid of 21 */
 .grid-container { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; max-width: 500px; margin-top: 10px; padding-bottom: 40px; }
 .station-tile { background: #1a1a1a; color: #ccff00; border: 1px solid #ccff00; padding: 12px; border-radius: 8px; text-align: left; font-size: 16px; display: flex; align-items: center; cursor: pointer; }
 .station-tile b { margin-right: 12px; color: #fff; font-size: 18px; }
 
+/* Script Styles */
 #transcript-box { width: 100%; background: #050505; padding: 15px; border-radius: 12px; border: 1px solid #222; margin-top: 20px; }
 .line-container { margin-bottom: 25px; }
 .clickable-word { font-size: 26px; line-height: 1.8; display: inline-block; margin-right: 6px; cursor: pointer; }
 .speaker-official { color: #1e90ff; }
 .speaker-traveler { color: #ff4444; }
 
-/* The Sleek Translation Tooltip */
-#translation-popup {
-    position: absolute;
-    background: #ccff00;
-    color: #000;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 18px;
-    pointer-events: none;
-    z-index: 1000;
-    box-shadow: 0 0 15px #ccff00;
-}
+/* Tooltip Popup */
+#translation-popup { position: absolute; background: #ccff00; color: #000; padding: 8px 12px; border-radius: 8px; font-weight: bold; font-size: 18px; pointer-events: none; z-index: 1000; box-shadow: 0 0 15px #ccff00; }
 
-/* Modes */
-.mode-btn { width: 100%; padding: 16px; margin: 6px 0; font-size: 18px; font-weight: bold; border-radius: 50px; background: transparent; }
+/* Neon Buttons */
+.mode-btn { width: 100%; padding: 16px; margin: 6px 0; font-size: 18px; font-weight: bold; border-radius: 50px; background: transparent; cursor: pointer; }
 .neon-blue { color: #00e5ff; border: 2px solid #00e5ff; }
 .neon-green { color: #39ff14; border: 2px solid #39ff14; }
 .neon-pink { color: #ff00ff; border: 2px solid #ff00ff; }
 .back-btn { margin-top: 20px; color: #888; background: none; border: 1px solid #444; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
-.ctrl-btn { background: #333; color: #fff; border: none; padding: 10px 18px; border-radius: 5px; margin: 4px; }
+.ctrl-btn { background: #333; color: #fff; border: none; padding: 10px 18px; border-radius: 5px; margin: 4px; cursor: pointer; }
