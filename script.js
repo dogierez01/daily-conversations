@@ -6,6 +6,7 @@ const grid = document.getElementById('stations-grid');
 const playerZone = document.getElementById('player-zone');
 const audioPlayer = document.getElementById('audio-player');
 const nowPlayingTitle = document.getElementById('now-playing-title');
+const transcriptBox = document.getElementById('transcript-box');
 
 // Buttons
 const btnStart = document.getElementById('btn-start');
@@ -17,7 +18,7 @@ const ctrlPlay = document.getElementById('ctrl-play');
 const ctrlPause = document.getElementById('ctrl-pause');
 const ctrlStop = document.getElementById('ctrl-stop');
 
-// 2. THE 21 STATIONS (Filenames must match your GitHub files exactly)
+// 2. THE 21 STATIONS (Filenames match your GitHub files)
 const stations = [
     "01_Airport_Check-in.wav", "02_Boarding_and_Seating.wav", "03_Initial_Flight_Attendant.wav",
     "04_In-Flight_Request.wav", "05_Passport_Control.wav", "06_Customs_Clearance.wav",
@@ -28,7 +29,7 @@ const stations = [
     "19_Returning_the_Car.wav", "20_Arranging_Airport_Transfer.wav", "21_Taxi_to_the_Airport.wav"
 ];
 
-// 3. NAVIGATION LOGIC (Moving between screens)
+// 3. NAVIGATION LOGIC
 btnStart.onclick = () => {
     splashScreen.classList.add('hidden');
     instructionsScreen.classList.remove('hidden');
@@ -42,22 +43,21 @@ btnEnter.onclick = () => {
 btnBack.onclick = () => {
     playerZone.classList.add('hidden');
     grid.classList.remove('hidden');
+    transcriptBox.classList.add('hidden'); // Hide text when going back
     audioPlayer.pause();
-    audioPlayer.currentTime = 0; // Reset audio
+    audioPlayer.currentTime = 0;
 };
 
 // 4. BUILDING THE GRID OF 21
 stations.forEach((filename, index) => {
     const tile = document.createElement('button');
     tile.className = 'station-tile';
-    tile.innerText = index + 1; // Shows 1, 2, 3...
+    tile.innerText = index + 1;
     
     tile.onclick = () => {
-        // Hide grid, show player
         grid.classList.add('hidden');
         playerZone.classList.remove('hidden');
         
-        // Prepare the audio
         const cleanName = filename.replace('.wav', '').replace(/_/g, ' ');
         nowPlayingTitle.innerText = cleanName;
         audioPlayer.src = filename;
@@ -74,16 +74,49 @@ ctrlStop.onclick = () => {
     audioPlayer.currentTime = 0;
 };
 
-// 6. PLACEHOLDERS FOR NEXT STEPS
+// 6. MODE BUTTONS (The Neon Trio)
+
+// LISTEN BLIND (Blue)
 document.getElementById('btn-blind').onclick = () => {
+    transcriptBox.classList.add('hidden'); // Hide text for blind listening
     audioPlayer.play();
-    alert("Audio playing. Keep your eyes on the screen, listen closely!");
 };
 
+// LISTEN + READ (Green) - TAP TO TRANSLATE LOGIC
 document.getElementById('btn-read').onclick = () => {
-    alert("The 'Listen + Read' feature is coming in the next update!");
+    const filename = audioPlayer.src.split('/').pop();
+    const lesson = typeof lessonData !== 'undefined' ? lessonData[filename] : null;
+
+    if (lesson) {
+        transcriptBox.classList.remove('hidden');
+        transcriptBox.innerHTML = ""; // Clear old text
+
+        // Split text into words
+        const words = lesson.english.split(" ");
+
+        words.forEach(word => {
+            const span = document.createElement('span');
+            // Remove punctuation for the dictionary check
+            const cleanWord = word.replace(/[.,?!]/g, "");
+            span.innerText = word + " ";
+            span.className = "clickable-word";
+            span.style.cursor = "pointer";
+            
+            // Only show translation on tap
+            span.onclick = () => {
+                const turkish = lesson.dictionary[cleanWord];
+                if (turkish) {
+                    alert(`${cleanWord} = ${turkish}`);
+                }
+            };
+            transcriptBox.appendChild(span);
+        });
+    } else {
+        alert("Transcript data not found for this station.");
+    }
 };
 
+// MATCH GAME (Pink)
 document.getElementById('btn-game').onclick = () => {
-    alert("The 'Match Game' feature is coming in the next update!");
+    alert("Match Game logic will be added once the Read feature is verified!");
 };
