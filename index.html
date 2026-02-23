@@ -41,13 +41,18 @@
                 <button id="btn-read" class="mode-btn neon-green">📖 LISTEN + READ</button>
                 <button id="btn-game" class="mode-btn neon-pink">🎮 MATCH GAME</button>
             </div>
+            
+            <div id="game-zone" class="hidden">
+                <p id="game-instruction">Match the pairs!</p>
+                <div id="game-board"></div>
+            </div>
+
             <div id="transcript-box" class="hidden"></div>
             <button id="btn-back" class="back-btn">⬅ BACK TO LIST</button>
         </div>
     </div>
 
     <div id="translation-popup" class="hidden"></div>
-    
     <audio id="audio-player" controlsList="nodownload"></audio>
     <script src="data.js"></script>
     <script src="script.js"></script>
