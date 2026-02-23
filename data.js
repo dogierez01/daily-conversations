@@ -1,10 +1,10 @@
 const lessonData = {
     "01_Airport_Check-in.wav": [
-        { speaker: "official", text: "Good morning. May I see your passport and ticket, please?", dict: { "Good": "İyi", "morning": "günaydın", "passport": "pasaport", "ticket": "bilet", "please": "lütfen" } },
-        { speaker: "traveler", text: "Sure, here they are. I have a window seat, right?", dict: { "Sure": "Tabii", "here": "işte", "window": "pencere", "seat": "koltuk", "right": "değil mi" } },
-        { speaker: "official", text: "Yes, 14A. Do you have any bags to check in?", dict: { "bags": "çantalar", "check": "kayıt", "any": "hiç" } },
-        { speaker: "traveler", text: "Just this suitcase and a small carry-on bag.", dict: { "suitcase": "valiz", "carry-on": "el bagajı" } },
-        { speaker: "official", text: "Please place the suitcase on the scale. Everything looks good.", dict: { "place": "koyun", "scale": "tartı", "looks": "görünüyor" } },
-        { speaker: "traveler", text: "Thank you. Have a nice flight.", dict: { "flight": "uçuş", "nice": "iyi" } }
+        { speaker: "traveler", text: "Hello, I can go Barcelona?", dict: { "Hello": "Merhaba", "go": "gitmek", "Barcelona": "Barselona" } },
+        { speaker: "official", text: "Hello. Can I see your passport, please?", dict: { "Hello": "Merhaba", "passport": "pasaport", "please": "lütfen" } },
+        { speaker: "traveler", text: "Yes, here it is.", dict: { "Yes": "Evet", "here": "işte" } },
+        { speaker: "official", text: "Thank you. Do you have any luggage?", dict: { "luggage": "bagaj", "have": "sahip olmak" } },
+        { speaker: "traveler", text: "Only this bag.", dict: { "Only": "Sadece", "bag": "çanta" } },
+        { speaker: "official", text: "Great. Here is your boarding pass.", dict: { "Great": "Harika", "boarding": "biniş", "pass": "kartı" } }
     ]
 };
